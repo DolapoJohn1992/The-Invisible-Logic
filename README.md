@@ -1,15 +1,31 @@
-The Invisible Logic: API Security Audit
-This repository contains the laboratory work for the **Cybersecurity Foundations Intensive** mission: *The Invisible Logic*.
+# 🛡️ Mission: The Invisible Logic
+**Cybersecurity Foundations Intensive** | *API Security & Logic Flaw Audit*
 
-## Mission Objective
-Identify and exploit logic flaws within a containerized web application to audit API security and recover sensitive discount codes.
+---
 
-## Lab Components
-* **deploy_web.sh**: Script to provision the Docker environment.
-* **api_audit.log**: Extracted security logs containing attacker IP addresses.
-* **system_auditor.py**: Python script used to verify network and resource status.
+### **📌 Mission Objective**
+The goal of this laboratory was to perform a security audit on a containerized web storefront. I focused on identifying **Broken Object Level Authorization (BOLA)** and exploiting **Business Logic Flaws** to recover sensitive data and bypass pricing restrictions.
 
-## Tools Used
-* Burp Suite Community Edition
-* Docker & UFW
-* Python 3
+---
+
+### **🛠️ Technical Stack**
+| Category | Tools & Technologies |
+| :--- | :--- |
+| **Environment** | Docker, Ubuntu VM, Nginx |
+| **Testing** | Burp Suite Community Edition, cURL |
+| **Scripting** | Python 3, Bash |
+| **Documentation** | Git, GitHub |
+
+---
+
+### **🔍 Key Security Findings**
+* **BOLA (ID Swap):** Successfully exploited a vulnerability in the `/api/v1/profile/` endpoint by swapping User IDs to leak private admin credentials.
+* **Logic Exploitation:** Used **Burp Suite Intruder** to brute-force a 4-digit discount code, bypassing the intended purchase logic of the storefront.
+* **Remediation:** Recommended implementing **Rate Limiting** and **Strict Object-Level Authorization** checks on all API requests.
+
+---
+
+### **📂 Lab Inventory**
+* `api_audit.log`: Detailed record of intercepted traffic and exploited endpoints.
+* `deploy_web.sh`: Bash script used to provision the laboratory environment.
+* `README.md`: Mission documentation and summary.
