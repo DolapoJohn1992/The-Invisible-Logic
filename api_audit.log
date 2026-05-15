@@ -1,0 +1,18 @@
+==================================================
+SESSION 27: API SECURITY AUDIT LOG
+==================================================
+
+1. BOLA (ID SWAP) EXPLOITATION
+* Targeted User ID: [101]
+* Private Information Leaked: [TITAN_MASTER_KEY_2026"]
+
+2. BUSINESS LOGIC EXPLOITATION (DISCOUNT HUNTER)
+* Hidden Discount Code Discovered: [0427]
+* Method Used: [I intercepted the request using Burp Suite Proxy and identified that the discount parameter accepted numeric input without proper validation or rate limiting. I then sent the request to Burp Intruder and configured a Sniper attack targeting the discount code parameter. I loaded a payload set containing sequential 4-digit numbers (0000–9999) and started the attack to automate testing of possible codes. I monitored the responses for changes in status codes and response length, which helped identify the valid discount code when a successful response was returned.]
+
+3. REMEDIATION RECOMMENDATION
+* How would you fix the BOLA vulnerability?
+Answer: Implement strict object-level authorization checks on every request. The server must verify that the authenticated user is permitted to access the requested resource before returning any data. Avoid relying on user-supplied IDs alone. Instead, use secure indirect references (like UUIDs or session-bound object mapping). Also ensure default-deny access control and centralize authorization logic to prevent bypasses.
+
+* How would you fix the Brute-Force vulnerability in the discount field?
+Answer: Add rate limiting on the discount endpoint to restrict repeated attempts from the same IP/user. Introduce temporary lockouts or cooldowns after several failed attempts. Increase entropy by replacing predictable 4-digit codes with longer, randomized tokens. You can also implement server-side validation rules, monitoring/alerting for repeated attempts, and CAPTCHA challenges to reduce automated guessing.
